@@ -22,8 +22,8 @@ def create_application() -> FastAPI:
     application.include_router(projects.router, prefix="/projects", tags=["projects"])
     application.include_router(tasks.router, prefix="/tasks", tags=["tasks"])
     origins = [
-    "http://localhost",
-    "http://localhost:3007",
+        "http://localhost",
+        "http://localhost:3007",
     ]
     application.add_middleware(
         CORSMiddleware,
@@ -31,7 +31,7 @@ def create_application() -> FastAPI:
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
-        )
+    )
     return application
 
 

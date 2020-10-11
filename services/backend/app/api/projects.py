@@ -1,7 +1,13 @@
 from fastapi import APIRouter, HTTPException
 from app.api import crud
 
-from app.schemas import ProjectPayloadSchema, ProjectResponseSchema, ProjectSchema, TaskResponseSchema, TaskPayloadSchema
+from app.schemas import (
+    ProjectPayloadSchema,
+    ProjectResponseSchema,
+    ProjectSchema,
+    TaskResponseSchema,
+    TaskPayloadSchema,
+)
 from app.utils import to_dict
 
 from typing import List
@@ -33,9 +39,9 @@ async def get_project(project_id: int) -> ProjectSchema:
 async def get_project(project_id: int, payload: ProjectPayloadSchema) -> ProjectSchema:
     print(payload)
     project = await crud.put_project(project_id, payload)
-    #if project is None:
+    # if project is None:
     #    raise HTTPException(404, "This project id does not exist")
-    print (project)
+    print(project)
     return project
 
 
@@ -48,7 +54,9 @@ async def get_project_tasks(project_id: int) -> List[TaskResponseSchema]:
 
 
 @router.post("/{project_id}/tasks", response_model=TaskResponseSchema)
-async def create_task(project_id: int, payload: TaskPayloadSchema) -> TaskResponseSchema:
+async def create_task(
+    project_id: int, payload: TaskPayloadSchema
+) -> TaskResponseSchema:
     task = await crud.post_task(project_id, payload.name)
     if task is None:
         raise HTTPException(404, "This project id does not exist")

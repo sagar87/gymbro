@@ -1,7 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from app.api import crud
 
-from app.schemas import TaskPayloadSchema, TaskResponseSchema, IntervalPayloadSchema, IntervalResponseSchema
+from app.schemas import (
+    TaskPayloadSchema,
+    TaskResponseSchema,
+    IntervalPayloadSchema,
+    IntervalResponseSchema,
+)
 from app.utils import to_dict
 
 from typing import List
@@ -24,11 +29,14 @@ async def get_task(task_id: int) -> TaskResponseSchema:
 
 
 @router.post("/{task_id}", response_model=IntervalResponseSchema)
-async def get_task(task_id: int, payload: IntervalPayloadSchema) -> IntervalResponseSchema:
+async def get_task(
+    task_id: int, payload: IntervalPayloadSchema
+) -> IntervalResponseSchema:
 
     print(payload.started, payload.ended)
     interval = await crud.post_interval(task_id, payload)
     return interval
+
 
 @router.get("/{task_id}/intervals", response_model=List[IntervalResponseSchema])
 async def get_task_intervals(task_id: int) -> List[IntervalResponseSchema]:

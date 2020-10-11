@@ -13,7 +13,7 @@ class ProjectPayloadSchema(BaseModel):
 class ProjectResponseSchema(ProjectPayloadSchema):
     id: int
     created_at: datetime
-    #tasks: List[TaskResponseSchema]
+    # tasks: List[TaskResponseSchema]
 
 
 class TaskPayloadSchema(BaseModel):
@@ -23,8 +23,10 @@ class TaskPayloadSchema(BaseModel):
 class TaskResponseSchema(TaskPayloadSchema):
     id: int
     project_id: int
+
     class Config:
         orm_mode = True
+
 
 class IntervalPayloadSchema(BaseModel):
     started: datetime
@@ -33,8 +35,10 @@ class IntervalPayloadSchema(BaseModel):
 
 class IntervalResponseSchema(IntervalPayloadSchema):
     id: int
+
     class Config:
         orm_mode = True
+
 
 ProjectSchema = pydantic_model_creator(Project)
 TaskSchema = pydantic_model_creator(Task)
