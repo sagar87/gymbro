@@ -4,3 +4,4 @@ env
 htmlcov
 client
 kubernetes
+.DS_Store
