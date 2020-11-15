@@ -33,7 +33,7 @@ docker-compose exec web-db psql -U postgres
 Initialise DB
 
 ```
-docker-compose exec web python app/db.py
+docker-compose exec web python app/config.py
 ```
 
 ### Testing
