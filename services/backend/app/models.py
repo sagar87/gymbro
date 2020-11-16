@@ -29,6 +29,7 @@ class Workouts(models.Model):
     """
     A session represents a single workout, comprising several sets.
     """
+
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=128, null=False)
     created_at = fields.DatetimeField(auto_now_add=True)
@@ -42,12 +43,14 @@ class Exercises(models.Model):
     """
     An exercise. For example: Benchpress.
     """
+
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=128, null=False)
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
 
     session: fields.ReverseRelation["Sessions"]
+
 
 class Sessions(models.Model):
     id = fields.IntField(pk=True)
@@ -57,9 +60,10 @@ class Sessions(models.Model):
     workout: fields.ForeignKeyRelation[Workouts] = fields.ForeignKeyField(
         "models.Workouts", related_name="session"
     )
-    
+
     targets: fields.ReverseRelation["Targets"]
     logs: fields.ReverseRelation["Logs"]
+
 
 class Targets(models.Model):
     id = fields.IntField(pk=True)
@@ -76,8 +80,9 @@ class Logs(models.Model):
     """
     An exercise. For example: Benchpress.
     """
+
     id = fields.IntField(pk=True)
-    
+
     workout: fields.ForeignKeyRelation[Workouts] = fields.ForeignKeyField(
         "models.Workouts", related_name="logs"
     )

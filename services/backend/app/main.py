@@ -1,14 +1,12 @@
 import logging
 
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from tortoise.contrib.fastapi import register_tortoise
 
-from app.config import get_settings, Settings
 from app.api import ping
-from app.api import projects
-from app.api import tasks
+from app.api import exercises
+from app.api import workouts
 
 from app.database import init_db
 from app.config import get_settings
@@ -19,8 +17,10 @@ log = logging.getLogger(__name__)
 def create_application() -> FastAPI:
     application = FastAPI()
     application.include_router(ping.router)
-    application.include_router(projects.router, prefix="/projects", tags=["projects"])
-    application.include_router(tasks.router, prefix="/tasks", tags=["tasks"])
+    application.include_router(
+        exercises.router, prefix="/exercises", tags=["exercises"]
+    )
+    application.include_router(workouts.router, prefix="/workouts", tags=["workouts"])
     origins = [
         "http://localhost",
         "http://localhost:3007",

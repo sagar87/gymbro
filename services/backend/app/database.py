@@ -1,9 +1,8 @@
-import os
+
 import logging
 
 from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
-from app.config import get_settings
 from pydantic import BaseSettings
 
 log = logging.getLogger(__name__)
